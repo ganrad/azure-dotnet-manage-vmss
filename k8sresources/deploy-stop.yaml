@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: recycle-vmss-rg14-deploy
+  name: vmss-rg14-stop
   labels:
-    app: recycle-vmss-rg14
+    app: recycle-vmss-rg14-stop
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: recycle-vmss-rg14
+      app: recycle-vmss-rg14-stop
   template:
     metadata:
       labels:
-        app: recycle-vmss-rg14
+        app: recycle-vmss-rg14-stop
     spec:
       containers:
-      - name: recycle-vmss-rg14
+      - name: recycle-vmss-rg14-stop
         image: grakslab.azurecr.io/recycle-vmss:latest
         imagePullPolicy: Always
         env:
@@ -35,17 +35,17 @@ spec:
           value: ""
         - name: AZURE_SP_APP_ID_URI
           value: "https://management.azure.com"
-        - name: VmssStartTriggerSchedule
-          value: "0 0 8 * * Mon"
-        - name: VmssStopTriggerSchedule
-          value: "0 0 19 * * Fri"
         - name: AZURE_SUBSCRIPTION_ID
           value: ""
         - name: AZURE_RES_GROUP_NAME
           value: ""
-        - name: AZURE_VMSS_API_VER
-          value: "2019-12-01"
         - name: AZURE_VMSS_NAME
           value: ""
+        - name: AZURE_VMSS_API_VER
+          value: "2019-12-01"
+        - name: VmssTriggerSchedule
+          value: "0 0 19 * * Fri"
+        - name: AZURE_VMSS_ACTION
+          value: "deallocate"
       nodeSelector:
         kubernetes.io/os: linux

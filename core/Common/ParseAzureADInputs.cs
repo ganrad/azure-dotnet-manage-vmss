@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 
+using core.Interfaces;
+
 namespace core.Common
 {
-    public static class ParseInputs
+    public class ParseAzureADInputs : IParseInputs
     {
-        public static Dictionary<string,string> GetEnvVars()
+        public void GetEnvVars(ref Dictionary<string, string> envVars)
         {
-	    Dictionary<string, string> envVars = new Dictionary<string, string>();
-	    
 	    string adTenantId = Environment.GetEnvironmentVariable(AzureAdEnvConstants.AZURE_AD_TENANT_ID);
 	    if ( string.IsNullOrEmpty(adTenantId) )
 	       throw new ArgumentNullException($"Env. variable : {AzureAdEnvConstants.AZURE_AD_TENANT_ID} not found!");
@@ -38,8 +38,8 @@ namespace core.Common
 	       throw new ArgumentNullException($"Env. variable : {AzureAdEnvConstants.AZURE_SP_APP_ID_URI} not found!");
 	    else
 	       envVars.Add(AzureAdEnvConstants.AZURE_SP_APP_ID_URI,appIdUri);
-	    
-	    return(envVars);
+
+	    return;
         }
     }
 }
