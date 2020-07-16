@@ -8,11 +8,11 @@ Problem Definition: "Customers running AKS clusters in non-production regions of
 UrlFragment: azure-dotnet-manage-vmss
 ---
 
-# Deallocate and Start Azure Virtual Machine Scale Sets on a pre-defined schedule
+# Lower Azure Kubernetes Service costs by deallocating / reallocating VMSS resources as needed
 
-At any given time, an AKS Cluster usually has multiple node pools running.  Node pool Virtual Machines are usually deployed on a **Azure Virtual Machine Scale Sets**.  Also, customers usually have multiple AKS clusters deployed in different environments.  Azure PaaS services deployed in non-prod (or non critical) regions usually consume compute resources even when the applications are not actively serving any end user requests.  A common scenario is when the AKS clusters are allowed to run during weekends when there is little to no user activity.
+At any given time, an AKS Cluster usually has multiple node pools running.  Node pool Virtual Machines are usually deployed on **Azure Virtual Machine Scale Sets**.  Also, customers typically provision multiple AKS clusters to isolate applications deployed in different environments such as dev-test, pre-prod and so forth.  Azure PaaS services deployed in non-prod (or non critical) regions usually consume compute resources even when the deployed applications are not actively serving any end user requests.  A common scenario is when the AKS clusters are allowed to run during weekends when there is little to no user activity.
 
-This project provides an automated solution to that allows customers to deallocate and restart Virtual Machine Scale Sets on a pre-defined schedule.  By shutting down the VM's associated with VMSS during long periods of inactivity, customers can easily lower their Azure infrastructure costs.
+This project provides a simple automated solution that allows customers to deallocate and restart Virtual Machine Scale Sets on a pre-defined schedule.  By shutting down the VM's associated with VMSS during long periods of inactivity, customers can easily lower their Azure infrastructure costs.
 
 ## Prerequisites
 
@@ -27,6 +27,16 @@ This project provides an automated solution to that allows customers to dealloca
 - [Azure Functions documentation](https://docs.microsoft.com/en-us/azure/azure-functions/)
 
 ## Deploy Solution on Azure
+This solution can be deployed on any one of the following platforms.
+- Run as a standalone container on a Linux/Windows VM (Container engine required)
+- Azure Functions
+- Azure Container Instances
+- Azure Kubernetes Service
+- Azure App Service
+
+Steps for deploying this solution on an AKS cluster is detailed below.
+
+1. 
 
 ## Project code of conduct
 
