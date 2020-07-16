@@ -1,0 +1,19 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "",
+	"WEBSITE_TIME_ZONE": "America/Vancouver",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+	"AZURE_AD_TENANT_ID": "",
+	"AZURE_AD_TOKEN_EP": "https://login.microsoftonline.com",
+	"AZURE_SP_CLIENT_ID": "AD Service Principal Application ID",
+	"AZURE_SP_CLIENT_SECRET": "AD Service Principal Secret",
+	"AZURE_SP_APP_ID_URI": "https://management.azure.com",
+	"VmssStartTriggerSchedule": "0 0 8 * * Mon",
+	"VmssStopTriggerSchedule": "0 0 19 * * Fri",
+	"AZURE_SUBSCRIPTION_ID": "",
+	"AZURE_RES_GROUP_NAME": "Resource group name where AKS cluster is running",
+	"AZURE_VMSS_API_VER": "2019-12-01",
+	"AZURE_VMSS_NAME": "AKS cluster VMSS name"
+    }
+}

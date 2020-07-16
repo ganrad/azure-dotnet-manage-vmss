@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recycle-vmss-rg14-deploy
+  labels:
+    app: recycle-vmss-rg14
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recycle-vmss-rg14
+  template:
+    metadata:
+      labels:
+        app: recycle-vmss-rg14
+    spec:
+      containers:
+      - name: recycle-vmss-rg14
+        image: grakslab.azurecr.io/recycle-vmss:latest
+        imagePullPolicy: Always
+        env:
+        - name: AzureWebJobsStorage
+          value: ""
+        - name: WEBSITE_TIME_ZONE
+          value: "America/Vancouver"
+        - name: FUNCTIONS_WORKER_RUNTIME
+          value: "dotnet"
+        - name: AZURE_AD_TENANT_ID
+          value: ""
+        - name: AZURE_AD_TOKEN_EP
+          value: ""
+        - name: AZURE_SP_CLIENT_ID
+          value: ""
+        - name: AZURE_SP_CLIENT_SECRET
+          value: ""
+        - name: AZURE_SP_APP_ID_URI
+          value: "https://management.azure.com"
+        - name: VmssStartTriggerSchedule
+          value: "0 0 8 * * Mon"
+        - name: VmssStopTriggerSchedule
+          value: "0 0 19 * * Fri"
+        - name: AZURE_SUBSCRIPTION_ID
+          value: ""
+        - name: AZURE_RES_GROUP_NAME
+          value: ""
+        - name: AZURE_VMSS_API_VER
+          value: "2019-12-01"
+        - name: AZURE_VMSS_NAME
+          value: ""
+      nodeSelector:
+        kubernetes.io/os: linux
