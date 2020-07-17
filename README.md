@@ -78,7 +78,7 @@ Steps for deploying this solution on an AKS cluster is detailed below.
 
    The **VMSS Scale Trigger** Azure Function uses Azure Resource Manager APIs to deallocate and start VMSS.
 
-   Refer to the table below to set correct values for the required environment variables. These environment variables are required for the Function to invoke Azure Resource Provider API's for VMSS.
+   Refer to the table below to set correct values for the required Function environment variables.
 
    Environment Variable Name | Value | Description
    ------------------------- | ----- | -----------
@@ -94,8 +94,29 @@ Steps for deploying this solution on an AKS cluster is detailed below.
    AZURE_RES_GROUP_NAME | Required | Specify the Resource Group in which the VMSS resource is deployed.  This is usually the AKS cluster **node** resource group.
    AZURE_VMSS_NAME | Required | Specify the name of the VMSS.
    AZURE_VMSS_API_VER | 2019-12-01 | This is the Azure resource provider API version. You can leave this value as is.
-   AZURE_VMSS_ACTION | Required | Specify the **action** to be performed on the VMSS.  Supported values are - start (to start the VMSS), deallocate (to stop and deallocate the VM's associated with the VMSS).
+   AZURE_VMSS_ACTION | Required | Specify the **action** to be performed on the VMSS.  Supported values are - **start** (to start the VMSS), **deallocate** (to stop and deallocate the VM's associated with the VMSS).
    VmssTriggerSchedule | Required | An NCRONTAB expression which specifies the Function execution schedule. Refer to the [Function documentation](https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=csharp#ncrontab-expressions) for details and correct syntax.
+
+4. Deploy the Function Pods to an AKS cluster
+
+   Refer to the command snippet below to deploy an instance of the **VMSS Scale Trigger** Azure Function on AKS. You may need to deploy two instances of this Function application, one to stop/deallocate the VMSS and another instance to start it.
+
+   ```
+   # (Optional) Create a new namespace
+   $ kubectl create ns manage-clusters
+   #
+   # Deploy the 'VMSS Scale Trigger' function to stop/deallocate the VMSS instance for a given AKS cluster
+   # Issue this command from the project home/root directory
+   $ kubectl apply -f k8sresources/deploy-stop.yaml -n manage-clusters
+   # 
+   # Deploy the 'VMSS Scale Trigger' function to start the VMSS instance for a given AKS cluster
+   # Issue this command from the project home/root directory
+   $ kubectl apply -f k8sresources/deploy-start.yaml -n manage-clusters
+   #
+   # Verify the pods are running
+   $ kubectl get pods -n manage-clusters
+   #
+   ```
 
 ## Project code of conduct
 
