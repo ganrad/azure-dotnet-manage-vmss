@@ -38,7 +38,7 @@ This solution can be deployed on any one of the following platforms.
 - Azure Kubernetes Service
 - Azure App Service
 
-Steps for deploying this solution on an AKS cluster is detailed below.
+Steps for deploying this solution on an AKS cluster are detailed below.
 
 1. Fork/Clone this GitHub repository to your local machine
 
