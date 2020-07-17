@@ -28,7 +28,7 @@ spec:
         - name: AZURE_AD_TENANT_ID
           value: ""
         - name: AZURE_AD_TOKEN_EP
-          value: ""
+          value: "https://login.microsoftonline.com"
         - name: AZURE_SP_CLIENT_ID
           value: ""
         - name: AZURE_SP_CLIENT_SECRET
